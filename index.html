@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="icon" href="data:,">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>WebGL Demo</title>
+
+    <script id="fragment-shader" type="x-shader/x-fragment">
+        #version 300 es
+        precision mediump float;
+
+        out vec4 fColor;
+
+        void
+        main()
+        {
+            fColor = vec4( 0.0, 0.0, 0.0, 1.0 );
+        }
+    </script>
+
+    <script id="vertex-shader" type="x-shader/x-vertex">
+        #version 300 es
+        in vec4 aPosition;
+
+        void
+        main()
+        {
+            gl_Position = aPosition;
+        }
+    </script>
+
+    <script type="text/javascript" src="initShaders.js"></script>
+    <script type="text/javascript" src="MVnew.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"
+        integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="index.js"></script>
+</head>
+
+<body>
+    <canvas id="gl-canvas">
+        Oops ... your browser doesn't support the HTML5 canvas element
+    </canvas>
+    <button onclick="capture()">Capture</button>
+</body>
+
+</html>
