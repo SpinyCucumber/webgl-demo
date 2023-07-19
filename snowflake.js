@@ -19,7 +19,7 @@ let positions = [];
 let translateLoc;
 let positionLoc;
 
-const numTimesToSubdivide = 5;
+const numTimesToSubdivide = 0;
 const rotationMat = rotation(-2*Math.PI/6);
 const translation = vec4(0, 0, 0, 0);
 const alwaysDrawLine = false;
@@ -34,7 +34,7 @@ window.onload = function init()
     canvas = document.getElementById( "gl-canvas" );
 
     // Create WebGL context
-    gl = canvas.getContext('webgl2');
+    gl = canvas.getContext('webgl2', { antialias: false });
     if (!gl) { alert( "WebGL 2.0 isn't available" ); }
 
     //
@@ -50,7 +50,7 @@ window.onload = function init()
 
     // Configure WebGL
     gl.viewport( 0, 0, canvas.width, canvas.height );
-    gl.clearColor( 0.0, 0.0, 0.0, 1.0 );
+    gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
 
     //  Load shaders and initialize attribute buffers
     var program = initShaders(gl, "vertex-shader", "fragment-shader");
@@ -116,4 +116,11 @@ function render()
     gl.uniform4fv(translateLoc, translation);
     gl.clear( gl.COLOR_BUFFER_BIT );
     gl.drawArrays( gl.LINES, 0, positions.length );
+}
+
+function capture() {
+    render();
+    canvas.toBlob((blob) => {
+        saveAs(blob, "capture.png");
+    });
 }
