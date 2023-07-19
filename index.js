@@ -40,6 +40,11 @@ window.onload = function init() {
     render();
 };
 
+/**
+ * Resizes the canvas so that each canvas pixel maps to a single device pixel
+ * @param {number} width Width of canvas in CSS pixel units
+ * @param {number} height Height of canvas in CSS pixel units
+ */
 function resizeCanvas(width, height) {
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
@@ -54,6 +59,7 @@ function render() {
 }
 
 function capture() {
+    // Must render and capture canvas in same frame, see https://stackoverflow.com/a/32641456
     render();
     canvas.toBlob((blob) => {
         saveAs(blob, "capture.png");
